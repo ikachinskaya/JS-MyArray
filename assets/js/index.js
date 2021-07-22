@@ -5,6 +5,13 @@ function MyArrayProto() {
     }
     return this.length;
   };
+
+  this.pop = function () {
+    let removedElement = this[this.length - 1];
+    delete this[this.length - 1];
+    this.length--;
+    return removedElement;
+  };
 }
 
 function MyArray() {
@@ -15,4 +22,7 @@ MyArray.prototype = new MyArrayProto();
 const myArray = new MyArray();
 
 myArray.push(0, 1, 2, 3, 4, 5, 6);
+console.log(myArray);
+
+console.log(myArray.pop());
 console.log(myArray);
