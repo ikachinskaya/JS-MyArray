@@ -22,6 +22,15 @@ function MyArrayProto() {
     this.length--;
     return removedElement;
   };
+
+  this.unshift = function (element) {
+    for (let i = this.length - 1; i >= 0; i--) {
+      this[i + 1] = this[i];
+    }
+    this[0] = element;
+    this.length++;
+    return this.length;
+  };
 }
 
 function MyArray() {
@@ -40,3 +49,5 @@ console.log(myArray);
 console.log(myArray.shift());
 console.log(myArray);
 
+console.log(myArray.unshift(5555));
+console.log(myArray);
