@@ -34,7 +34,23 @@ function MyArrayProto() {
     this.length += arguments.length;
     return this.length;
   };
-  
+
+  this.concat = function () {
+    let newArray = [];
+
+    for (let i = 0; i < this.length; i++) {
+      newArray[i] = this[i];
+    }
+
+    for (let i = 0; i < arguments.length; i++) {
+      for (let j = 0; j < arguments[i].length; j++) {
+        newArray[newArray.length] = arguments[i][j];
+      }
+    }
+    //newArray.length = this.length + arguments.length;
+    return newArray;
+  };
+
   this.some = function (func) {
     for (let i = 0; i < this.length; i++) {
       const result = func(this[i], i, this);
@@ -83,3 +99,7 @@ console.log(myArray);
 console.log(myArray.unshift(5555));
 console.log(myArray);
 
+const myArray2 = new MyArray(44, 55, 66, 77, 88, 99);
+const myArray3 = new MyArray("a", "b", "c", "d");
+let newArr2;
+newArr2 = myArray2.concat(myArray3);
