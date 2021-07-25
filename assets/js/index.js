@@ -24,27 +24,17 @@ function MyArrayProto() {
     return removedElement;
   };
 
-  this.unshift = function (element) {
-    for (let i = this.length - 1; i >= 0; i--) {
-      this[i + 1] = this[i];
-    }
-    this[0] = element;
-    this.length++;
-    return this.length;
-  };
-
-  this.unshiftTwo = function () {
+  this.unshift = function (elements) {
     for (let i = this.length - 1; i >= 0; i--) {
       this[i + arguments.length] = this[i];
     }
     for (let i = 0; i < arguments.length; i++) {
       this[i] = arguments[i];
     }
-
-    this.length = this.length + arguments.length;
+    this.length += arguments.length;
     return this.length;
   };
-
+  
   this.some = function (func) {
     for (let i = 0; i < this.length; i++) {
       const result = func(this[i], i, this);
@@ -72,6 +62,10 @@ function MyArray() {
   for (let i = 0; i < arguments.length; i++) {
     this.push(arguments[i]);
   }
+
+  this.isMyArray = function () {
+    return this instanceof MyArrayProto;
+  };
 }
 MyArray.prototype = new MyArrayProto();
 
@@ -80,20 +74,12 @@ const myArray = new MyArray();
 myArray.push(0, 1, 2, 3, 4, 5, 6);
 console.log(myArray);
 
-// console.log(myArray.pop());
-// console.log(myArray);
-
-// console.log(myArray.shift());
-// console.log(myArray);
-
-// console.log(myArray.unshift(5555));
-// console.log(myArray);
-
-console.log(myArray.unshiftTwo(11, 22, 33, 44, 55, 66, 77));
+console.log(myArray.pop());
 console.log(myArray);
 
-console.log(myArray.unshift(1111));
+console.log(myArray.shift());
 console.log(myArray);
 
-console.log(myArray.unshiftTwo(11111111));
+console.log(myArray.unshift(5555));
 console.log(myArray);
+
