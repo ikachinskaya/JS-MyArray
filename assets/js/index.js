@@ -51,6 +51,17 @@ function MyArrayProto() {
     return newArray;
   };
 
+  this.reverse = function () {
+    for (let i = 0; i < this.length-i-1; i++) {
+      //debugger
+      let temp = this[i];
+      this[i] = this[this.length - i-1];
+      this[this.length - i -1] = temp;
+      console.log(i);
+    }
+    return this;
+  };
+ 
   this.some = function (func) {
     for (let i = 0; i < this.length; i++) {
       const result = func(this[i], i, this);
@@ -87,19 +98,24 @@ MyArray.prototype = new MyArrayProto();
 
 const myArray = new MyArray();
 
-myArray.push(0, 1, 2, 3, 4, 5, 6);
-console.log(myArray);
+// myArray.push(0, 1, 2, 3, 4, 5, 6);
+// console.log(myArray);
 
-console.log(myArray.pop());
-console.log(myArray);
+// console.log(myArray.pop());
+// console.log(myArray);
 
-console.log(myArray.shift());
-console.log(myArray);
+// console.log(myArray.shift());
+// console.log(myArray);
 
-console.log(myArray.unshift(5555));
-console.log(myArray);
+// console.log(myArray.unshift(5555));
+// console.log(myArray);
 
-const myArray2 = new MyArray(44, 55, 66, 77, 88, 99);
-const myArray3 = new MyArray("a", "b", "c", "d");
-let newArr2;
-newArr2 = myArray2.concat(myArray3);
+// const myArray2 = new MyArray(44, 55, 66, 77, 88, 99);
+// const myArray3 = new MyArray("a", "b", "c", "d");
+// let newArr2;
+// newArr2 = myArray2.concat(myArray3);
+// console.log(newArr2);
+
+let myArray2 = new MyArray(111, 222, 333, 444, 555, 666, 777, 888, 999);
+console.log(myArray2);
+console.log(myArray2.reverse());
