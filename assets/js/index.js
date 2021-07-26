@@ -52,16 +52,27 @@ function MyArrayProto() {
   };
 
   this.reverse = function () {
-    for (let i = 0; i < this.length-i-1; i++) {
-      //debugger
+    for (let i = 0; i < this.length - i - 1; i++) {
       let temp = this[i];
-      this[i] = this[this.length - i-1];
-      this[this.length - i -1] = temp;
+      this[i] = this[this.length - i - 1];
+      this[this.length - i - 1] = temp;
       console.log(i);
     }
     return this;
   };
- 
+
+  this.forEach = function (func) {
+    for (let i = 0; i < this.length; i++) {
+      func(this[i], i, this);
+    }
+  };
+
+  this.map = function (func) {
+    for (let i = 0; i < this.length; i++) {
+      this[i] = func(this[i], i, this);
+    }
+  };
+
   this.some = function (func) {
     for (let i = 0; i < this.length; i++) {
       const result = func(this[i], i, this);
@@ -90,8 +101,8 @@ function MyArray() {
     this.push(arguments[i]);
   }
 
-  this.isMyArray = function () {
-    return this instanceof MyArrayProto;
+  this.isMyArray = function (arg) {
+    return arg instanceof MyArray;
   };
 }
 MyArray.prototype = new MyArrayProto();
@@ -117,5 +128,15 @@ const myArray = new MyArray();
 // console.log(newArr2);
 
 let myArray2 = new MyArray(111, 222, 333, 444, 555, 666, 777, 888, 999);
-console.log(myArray2);
-console.log(myArray2.reverse());
+// console.log(myArray2);
+// console.log(myArray2.reverse());
+
+function showElements(element) {
+  console.log(element);
+}
+myArray2.forEach(showElements);
+
+function sumElements(element) {
+  console.log(element + 1000000);
+}
+myArray2.map(sumElements);
