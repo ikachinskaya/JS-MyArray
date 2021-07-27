@@ -24,7 +24,7 @@ function MyArrayProto() {
     return removedElement;
   };
 
-  this.unshift = function (elements) {
+  this.unshift = function () {
     for (let i = this.length - 1; i >= 0; i--) {
       this[i + arguments.length] = this[i];
     }
@@ -35,7 +35,7 @@ function MyArrayProto() {
     return this.length;
   };
 
-  this.concat = function () {
+  this.concatValue = function () {
     let newArray = [];
 
     for (let i = 0; i < this.length; i++) {
@@ -43,11 +43,48 @@ function MyArrayProto() {
     }
 
     for (let i = 0; i < arguments.length; i++) {
+      newArray[newArray.length] = arguments[i];
+    }
+    newArray.length = this.length + arguments.length;
+    return newArray;
+  };
+
+  this.concatArray = function () {
+    let newArray = [];
+    for (let i = 0; i < this.length; i++) {
+      newArray[i] = this[i];
+    }
+    let argumentLength = 0;
+    for (let i = 0; i < arguments.length; i++) {
       for (let j = 0; j < arguments[i].length; j++) {
         newArray[newArray.length] = arguments[i][j];
+        argumentLength++;
       }
     }
-    //newArray.length = this.length + arguments.length;
+    newArray.length = this.length + argumentLength;
+    return newArray;
+  };
+
+  /*Кажется, получилось))))*/ 
+  this.concatValueAndArrays = function () {
+    let newArray = [];
+    for (let i = 0; i < this.length; i++) {
+      newArray[i] = this[i];
+    }
+    let argumentLength = 0;
+
+    for (let i = 0; i < arguments.length; i++) {
+      if (typeof arguments[i] === "object") {
+        for (let j = 0; j < arguments[i].length; j++) {
+          newArray[newArray.length] = arguments[i][j];
+          argumentLength++;
+        }
+      } else {
+        newArray[newArray.length] = arguments[i];
+        argumentLength++;
+      }
+    }
+    newArray.length = this.length + argumentLength;
     return newArray;
   };
 
@@ -127,16 +164,42 @@ const myArray = new MyArray();
 // newArr2 = myArray2.concat(myArray3);
 // console.log(newArr2);
 
-let myArray2 = new MyArray(111, 222, 333, 444, 555, 666, 777, 888, 999);
+//let myArray2 = new MyArray(111, 222, 333, 444, 555, 666, 777, 888, 999);
 // console.log(myArray2);
 // console.log(myArray2.reverse());
 
-function showElements(element) {
-  console.log(element);
-}
-myArray2.forEach(showElements);
+// function showElements(element) {
+//   console.log(element);
+// }
+// myArray2.forEach(showElements);
 
-function sumElements(element) {
-  console.log(element + 1000000);
-}
-myArray2.map(sumElements);
+// function sumElements(element) {
+//   console.log(element + 1000000);
+// }
+// myArray2.map(sumElements);
+
+// const array1 = new MyArray(1, 2, 3, 4);
+// const array2 = new MyArray(11, 22, 33, 44);
+// const arrayValueConcat = array1.concatValue(array2, 999999);
+// console.log(arrayValueConcat);
+
+// const array3 = new MyArray(111, 222, 3333, 4444);
+// const array4 = new MyArray(11111, 22222, 33333, 44444, 0, 0, 0, 0, 0, 0);
+// const arrayConcat = array3.concatArray(array4);
+// console.log(arrayConcat);
+
+const array5 = new MyArray(111, 222, 3333, 4444);
+const array6 = new MyArray(11111, 22222, 33333, 44444);
+const arrayValueAndArraysConcat = array5.concatValueAndArrays(
+  array6,
+  0,
+  0,
+  0,
+  0,
+  ["string"],
+  [9, 9, 9, 9],
+  ["test"],
+  [74, 74, 74],
+  666
+);
+console.log(arrayValueAndArraysConcat);
