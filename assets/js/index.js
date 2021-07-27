@@ -92,8 +92,7 @@ function MyArrayProto() {
     for (let i = 0; i < this.length - i - 1; i++) {
       let temp = this[i];
       this[i] = this[this.length - i - 1];
-      this[this.length - i - 1] = temp;
-      console.log(i);
+      this[this.length - i - 1] = temp;      
     }
     return this;
   };
