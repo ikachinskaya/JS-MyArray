@@ -65,7 +65,7 @@ function MyArrayProto() {
     return newArray;
   };
 
-  /*Кажется, получилось))))*/ 
+  /*Кажется, получилось))))*/
   this.concatValueAndArrays = function () {
     let newArray = [];
     for (let i = 0; i < this.length; i++) {
@@ -92,7 +92,7 @@ function MyArrayProto() {
     for (let i = 0; i < this.length - i - 1; i++) {
       let temp = this[i];
       this[i] = this[this.length - i - 1];
-      this[this.length - i - 1] = temp;      
+      this[this.length - i - 1] = temp;
     }
     return this;
   };
@@ -104,9 +104,11 @@ function MyArrayProto() {
   };
 
   this.map = function (func) {
+    let newArray = [];
     for (let i = 0; i < this.length; i++) {
-      this[i] = func(this[i], i, this);
+      newArray[i] = func(this[i], i, this);
     }
+    return newArray;
   };
 
   this.some = function (func) {
@@ -157,7 +159,7 @@ const myArray = new MyArray();
 // console.log(myArray.unshift(5555));
 // console.log(myArray);
 
-// const myArray2 = new MyArray(44, 55, 66, 77, 88, 99);
+ const myArray2 = new MyArray(44, 55, 66, 77, 88, 99);
 // const myArray3 = new MyArray("a", "b", "c", "d");
 // let newArr2;
 // newArr2 = myArray2.concat(myArray3);
@@ -172,11 +174,11 @@ const myArray = new MyArray();
 // }
 // myArray2.forEach(showElements);
 
-// function sumElements(element) {
-//   console.log(element + 1000000);
-// }
-// myArray2.map(sumElements);
-
+function sumElements(element) {
+  return element + 1000000;
+}
+const array45 = myArray2.map(sumElements);
+console.log(array45);
 // const array1 = new MyArray(1, 2, 3, 4);
 // const array2 = new MyArray(11, 22, 33, 44);
 // const arrayValueConcat = array1.concatValue(array2, 999999);
