@@ -41,38 +41,7 @@ function MyArrayProto() {
     return this.length;
   };
 
-  this.concatValue = function () {
-    const newArray = new MyArray();
-
-    for (let i = 0; i < this.length; i++) {
-      newArray.push(this[i]);
-    }
-
-    for (let i = 0; i < arguments.length; i++) {
-      newArray.push(arguments[i]);
-    }
-    newArray.length = this.length + arguments.length;
-    return newArray;
-  };
-
-  this.concatArray = function () {
-    const newArray = new MyArray();
-    for (let i = 0; i < this.length; i++) {
-      newArray.push(this[i]);
-    }
-    let argumentLength = 0;
-    for (let i = 0; i < arguments.length; i++) {
-      for (let j = 0; j < arguments[i].length; j++) {
-        newArray.push(arguments[i][j]);
-        argumentLength++;
-      }
-    }
-    newArray.length = this.length + argumentLength;
-    return newArray;
-  };
-
-  /*Кажется, получилось))))*/
-  this.concatValueAndArrays = function () {
+  this.concat = function () {
     const newArray = new MyArray();
     for (let i = 0; i < this.length; i++) {
       newArray.push(this[i]);
@@ -192,7 +161,7 @@ console.log(array45);
 
 const array5 = new MyArray(111, 222, 3333, 4444);
 const array6 = new MyArray(11111, 22222, 33333, 44444);
-const arrayValueAndArraysConcat = array5.concatValueAndArrays(
+const arrayValueAndArraysConcat = array5.concat(
   array6,
   0,
   0,
