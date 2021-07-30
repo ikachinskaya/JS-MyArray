@@ -77,26 +77,21 @@ function MyArrayProto() {
     for (let i = 0; i < this.length; i++) {
       newArray.push(this[i]);
     }
-    let argumentLength = 0;
-
     for (let i = 0; i < arguments.length; i++) {
-      if (typeof arguments[i] === "object" || Array.isArray(arguments[i])) {
+      if (Array.isArray(arguments[i]) || MyArray.isMyArray(arguments[i])) {
         for (let j = 0; j < arguments[i].length; j++) {
           newArray.push(arguments[i][j]);
-          argumentLength++;
         }
       } else {
         newArray.push(arguments[i]);
-        argumentLength++;
       }
     }
-    newArray.length = this.length + argumentLength;
     return newArray;
   };
 
   this.reverse = function () {
-    for (let i = 0; i < this.length - i - 1; i++) {
-      let temp = this[i];
+    for (let i = 0; i < this.length / 2; i++) {
+      const temp = this[i];
       this[i] = this[this.length - i - 1];
       this[this.length - i - 1] = temp;
     }
@@ -145,7 +140,6 @@ function MyArray() {
     this.push(arguments[i]);
   }
 }
-
 MyArray.isMyArray = function (arg) {
   return arg instanceof MyArray;
 };
